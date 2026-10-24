@@ -27,13 +27,13 @@ export default async function WorkOuts() {
     return (
         <section id="workouts" className="bg-gray-50 px-6 py-16">
             <div className="mx-auto max-w-7xl">
-                <div className="mb-10 text-center">
+                <div className="mb-10 text-left">
                     <h2 className="text-3xl font-bold text-gray-900 md:text-4xl">
-                        Explore Our Workouts
+                        THE LIBRARY
                     </h2>
 
                     <p className="mt-3 text-gray-600">
-                        Find a workout that fits your fitness goals.
+                        Twelve lifts covering every major muscle group.
                     </p>
                 </div>
 

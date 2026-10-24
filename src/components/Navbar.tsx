@@ -22,7 +22,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-2">
           <Dumbbell className="text-[#baff00]" size={24} />
           <span className="text-xl font-black tracking-tight">
-            FITLOG<span className="text-[#baff00]"></span>
+            FIT<span className="text-[#baff00]">LOG</span>
           </span>
         </Link>
 
