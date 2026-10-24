@@ -1,24 +1,47 @@
-import React from 'react';
+
+import Image from "next/image";
+import Link from "next/link";
 
 const Hero = () => {
-    return (
-<div className="hero bg-base-200 min-h-screen">
-  <div className="hero-content flex-col lg:flex-row-reverse">
-    <img
-      alt="Tailwind CSS hero component"
-      src="/assets/banner.png"
-    />
-    <div>
-     <h2 className = "text-eyebrow font-extrabold text-[#baff00]">WORKOUT LIBRARY</h2>
-      <h1 className="text-7xl uppercase font-bold">TRAIN WITH INTENT. LOG EVERY SET</h1>
-      <p className="py-6">
-        FitLog is a dark, no-nonsense gym companion: pick a lift, lock it <br></br> into today's plan, and watch the week's work add up.
-      </p>
-      <button className="btn btn-primary text-black  bg-[#baff00]">BROWSE WORKOUTS</button>
+  return (
+    <div className="hero min-h-screen bg-base-200">
+      <div className="hero-content flex-col gap-10 lg:flex-row-reverse">
+        {/* Optimized Hero Image */}
+        <Image
+          src="/assets/banner.png"
+          alt="Athlete training for the FitLog workout library"
+          width={700}
+          height={500}
+          priority
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="w-full max-w-xl rounded-2xl object-cover"
+        />
+
+        {/* Hero Content */}
+        <div className="max-w-2xl">
+          <h2 className="mb-4 text-sm font-extrabold uppercase tracking-[0.25em] text-[#baff00]">
+            WORKOUT LIBRARY
+          </h2>
+
+          <h1 className="text-4xl font-bold uppercase leading-tight sm:text-5xl lg:text-7xl">
+            TRAIN WITH INTENT. LOG EVERY SET
+          </h1>
+
+          <p className="py-6 leading-7 text-base-content/70">
+            FitLog is a dark, no-nonsense gym companion: pick a lift, lock it
+            into today&apos;s plan, and watch the week&apos;s work add up.
+          </p>
+
+          <Link
+            href="#workouts"
+            className="btn border-none bg-[#baff00] font-bold text-black hover:bg-[#d0ff4d]"
+          >
+            BROWSE WORKOUTS
+          </Link>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-    );
+  );
 };
 
 export default Hero;
