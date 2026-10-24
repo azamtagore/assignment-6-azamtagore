@@ -8,7 +8,6 @@ import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -39,6 +38,7 @@ export default function RootLayout({
           <Navbar />
 
           <main className="flex-1">{children}</main>
+
 
           <Footer />
 
