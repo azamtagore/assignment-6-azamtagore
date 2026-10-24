@@ -2,37 +2,52 @@
 "use client";
 
 import { Bookmark, CalendarPlus, Check } from "lucide-react";
-import type { WorkOut } from "@/lib/api";
 import { usePlan } from "@/context/PlanContext";
+import type { WorkOut } from "@/lib/api";
+
+interface WorkOutDetailsActionsProps {
+  workout: WorkOut;
+}
 
 export default function WorkOutDetailsActions({
   workout,
-}: {
-  workout: WorkOut;
-}) {
-  const { addToPlan, saveForLater, isInPlan, isSaved } = usePlan();
+}: WorkOutDetailsActionsProps) {
+  const {
+    addToPlan,
+    saveForLater,
+    isInPlan,
+    isSaved,
+    todaysPlan,
+  } = usePlan();
 
-  const planned = isInPlan(workout.id);
-  const saved = isSaved(workout.id);
+  const alreadyAdded = isInPlan(workout.id);
+  const alreadySaved = isSaved(workout.id);
+  const planIsFull = todaysPlan.length >= 5;
 
   return (
-    <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+    <div className="flex flex-wrap gap-3">
       <button
         type="button"
+        disabled={alreadyAdded || planIsFull}
         onClick={() => addToPlan(workout)}
-        className="btn border-0 bg-[#baff00] text-black hover:bg-[#a8e600]"
+        className="inline-flex items-center gap-2 rounded-lg bg-[#baff00] px-4 py-3 font-bold text-black transition hover:bg-[#d0ff4d] disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {planned ? <Check size={20} /> : <CalendarPlus size={20} />}
-        {planned ? "Already in today's plan" : "Add to today's plan"}
+        {alreadyAdded ? <Check size={18} /> : <CalendarPlus size={18} />}
+        {alreadyAdded
+          ? "Added to Today's Plan"
+          : planIsFull
+            ? "Plan Full (5/5)"
+            : "Add to Today's Plan"}
       </button>
 
       <button
         type="button"
+        disabled={alreadySaved}
         onClick={() => saveForLater(workout)}
-        className="btn border border-[#383d47] bg-[#20232b] text-white hover:bg-[#2b303a]"
+        className="inline-flex items-center gap-2 rounded-lg border border-white/15 px-4 py-3 font-bold text-white transition hover:border-[#baff00] hover:text-[#baff00] disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {saved ? <Check size={20} /> : <Bookmark size={20} />}
-        {saved ? "Saved for later" : "Save for later"}
+        {alreadySaved ? <Check size={18} /> : <Bookmark size={18} />}
+        {alreadySaved ? "Saved for Later" : "Save for Later"}
       </button>
     </div>
   );
