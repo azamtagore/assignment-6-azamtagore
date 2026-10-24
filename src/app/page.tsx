@@ -1,7 +1,6 @@
 import Hero from "@/components/Hero";
 import WorkOuts from "@/components/WorkOuts";
 import { getWorkOuts } from "@/lib/api";
-import Image from "next/image";
 import { Suspense } from "react";
 
 export default async function Home() {

@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Clock3, Flame, Star } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { getWorkOuts } from "@/lib/api";
 import WorkOutDetailsActions from "@/components/WorkOutDetailsActions";
 
@@ -81,11 +81,10 @@ export default async function WorkOutDetailsPage({
                 {specs.map((spec, index) => (
                   <div
                     key={spec.label}
-                    className={`flex items-center justify-between gap-4 px-5 py-3.5 ${
-                      index !== specs.length - 1
+                    className={`flex items-center justify-between gap-4 px-5 py-3.5 ${index !== specs.length - 1
                         ? "border-b border-[#272b34]"
                         : ""
-                    }`}
+                      }`}
                   >
                     <dt className="text-xs font-semibold tracking-wider text-[#9299a6] sm:text-sm">
                       {spec.label}
