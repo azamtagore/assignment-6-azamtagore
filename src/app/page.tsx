@@ -1,15 +1,26 @@
 import Hero from "@/components/Hero";
 import WorkOuts from "@/components/WorkOuts";
-import { AllWorkOuts } from "@/lib/api";
+import { getWorkOuts } from "@/lib/api";
 import Image from "next/image";
+import { Suspense } from "react";
 
 export default async function Home() {
-  const data = await AllWorkOuts();
+  const data= await getWorkOuts();
   console.log(data);
   return (
     <div>
       <Hero />
-    <WorkOuts data={data} />
+      <main>
+        <Suspense
+          fallback={
+            <section className="px-6 py-16 text-center">
+              Loading workouts...
+            </section>
+          }
+        >
+          <WorkOuts />
+        </Suspense>
+      </main>
     </div>
   );
 }
