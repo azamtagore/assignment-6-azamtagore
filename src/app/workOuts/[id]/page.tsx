@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { getWorkOuts } from "@/lib/api";
 import WorkOutDetailsActions from "@/components/WorkOutDetailsActions";
 
+
 export default async function WorkOutDetailsPage({
   params,
 }: {
