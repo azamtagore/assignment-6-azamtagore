@@ -5,6 +5,7 @@ import { PlanProvider } from "@/context/PlanContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
+import {Suspense} from "react";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
@@ -35,7 +36,9 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         <PlanProvider>
-          <Navbar />
+          <Suspense fallback={<div className="h-16 w-full bg-[#0b0d11]/95" />}>
+            <Navbar />
+          </Suspense>
 
           <main className="flex-1">{children}</main>
 
