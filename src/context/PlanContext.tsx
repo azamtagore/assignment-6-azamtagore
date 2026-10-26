@@ -1,4 +1,3 @@
-
 "use client";
 
 import {
@@ -33,27 +32,35 @@ export function PlanProvider({ children }: { children: ReactNode }) {
   const [savedWorkouts, setSavedWorkouts] = useState<WorkOut[]>([]);
   const [hydrated, setHydrated] = useState(false);
 
-  // Load saved lists once in the browser.
+  // Load both saved workouts and today's plan from localStorage on mount
   useEffect(() => {
     try {
-      const planData = localStorage.getItem(PLAN_KEY);
-      const savedData = localStorage.getItem(SAVED_KEY);
+      const savedPlan = localStorage.getItem(PLAN_KEY);
+      const savedWorkoutsData = localStorage.getItem(SAVED_KEY);
 
-      if (planData) setTodaysPlan(JSON.parse(planData));
-      if (savedData) setSavedWorkouts(JSON.parse(savedData));
-    } catch {
-      toast.error("Unable to load your saved workout lists.");
+      if (savedPlan) {
+        setTodaysPlan(JSON.parse(savedPlan));
+      }
+      if (savedWorkoutsData) {
+        setSavedWorkouts(JSON.parse(savedWorkoutsData));
+      }
+    } catch (error) {
+      console.error("Failed to load data from localStorage:", error);
     } finally {
       setHydrated(true);
     }
   }, []);
 
-  // Persist after browser storage has been loaded.
+  // Persist state updates to localStorage after initial hydration
   useEffect(() => {
     if (!hydrated) return;
 
-    localStorage.setItem(PLAN_KEY, JSON.stringify(todaysPlan));
-    localStorage.setItem(SAVED_KEY, JSON.stringify(savedWorkouts));
+    try {
+      localStorage.setItem(PLAN_KEY, JSON.stringify(todaysPlan));
+      localStorage.setItem(SAVED_KEY, JSON.stringify(savedWorkouts));
+    } catch (error) {
+      console.error("Failed to save data to localStorage:", error);
+    }
   }, [todaysPlan, savedWorkouts, hydrated]);
 
   const addToPlan = useCallback((workout: WorkOut) => {
